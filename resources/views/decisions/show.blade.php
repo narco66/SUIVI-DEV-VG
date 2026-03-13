@@ -1,23 +1,34 @@
-@extends('layouts.app')
+?@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Détails de la Décision</h2>
-            <p class="text-muted mb-0 text-uppercase" style="letter-spacing: 0.05em; font-size: 0.85rem;">{{ $decision->code }}</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-file-text-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Pilotage</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Détails de la Décision</h2>
+                        <p class="text-muted mb-2">{{ $decision->code }}</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">Vue détaillée</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center gap-2">
             <a href="{{ route('decisions.index') }}" class="btn btn-outline-secondary px-4">
                 <i class="bi bi-arrow-left me-2"></i> Retour
             </a>
-            <a href="{{ route('decisions.edit', $decision->id) }}" class="btn btn-primary px-4">
+            <a href="{{ route('decisions.edit', $decision->id) }}" class="btn btn-primary px-4 py-2 shadow-sm">
                 <i class="bi bi-pencil me-2"></i> Modifier
             </a>
         </div>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4"> 
         <div class="col-12 col-xl-8">
             <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden">
                 <div class="card-body p-0">
@@ -134,7 +145,7 @@
         </div>
 
         <div class="col-12 col-xl-4">
-            <div class="card border-0 shadow-sm mb-4 rounded-4 hover-elevate">
+            <div class="card border-0 shadow-sm mb-4 rounded-4 hover-elevate border bg-primary bg-opacity-10">
                 <div class="card-body p-4">
                     <h6 class="text-uppercase fw-bold text-muted mb-4" style="font-size: 0.8rem; letter-spacing: 0.05em;"><i class="bi bi-speedometer text-primary me-2"></i> État d'avancement global</h6>
                     <div class="d-flex align-items-center justify-content-between mb-3">
@@ -162,7 +173,7 @@
     <div class="row g-4 mt-1">
         <div class="col-12">
             <div class="card border-0 shadow-sm mb-4 rounded-4 overflow-hidden border">
-                <div class="card-header bg-white py-4 px-4 d-flex justify-content-between align-items-center border-bottom border-light">
+                <div class="card-header bg-primary bg-opacity-10 py-4 px-4 d-flex justify-content-between align-items-center border-bottom border-primary-subtle">
                     <div>
                         <h5 class="mb-1 fw-bold text-dark"><i class="bi bi-diagram-3 text-primary me-2"></i> Plans d'Action Rattachés</h5>
                         <p class="small text-muted mb-0">Déclinaisons opérationnelles et feuille de route de cette décision.</p>
@@ -286,3 +297,8 @@
     </div>
 </div>
 @endsection
+
+
+
+
+

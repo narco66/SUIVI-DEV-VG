@@ -2,23 +2,39 @@
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-1">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.index') }}" class="text-decoration-none">Administration</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
-                </ol>
-            </nav>
-            <h2 class="h3 fw-bold text-dark mb-0">Gestion des Utilisateurs</h2>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-people-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Administration</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Gestion des Utilisateurs</h2>
+                        <p class="text-muted mb-2">Administrez les comptes, rôles d'accès et rattachements institutionnels de la plateforme.</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $users->total() }} utilisateur(s) actif(s)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
-            <a href="{{ route('users.create') }}" class="btn btn-primary px-4 shadow-sm">
-                <i class="bi bi-person-plus me-2"></i> Nouvel Utilisateur
-            </a>
-            <a href="{{ route('roles.index') }}" class="btn btn-outline-secondary px-4 shadow-sm">
-                <i class="bi bi-shield-lock me-2"></i> Gérer les Rôles
-            </a>
+        <div class="col-12 col-md-auto d-flex align-items-stretch">
+            <div class="h-100 w-100 d-flex flex-column justify-content-between rounded-4 border bg-white p-4 shadow-sm gap-2">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-0">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}" class="text-decoration-none">Administration</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
+                    </ol>
+                </nav>
+                <a href="{{ route('users.create') }}" class="btn btn-primary px-4 w-100">
+                    <i class="bi bi-person-plus me-2"></i> Nouvel Utilisateur
+                </a>
+                <a href="{{ route('roles.index') }}" class="btn btn-outline-secondary px-4 w-100">
+                    <i class="bi bi-shield-lock me-2"></i> Gérer les Rôles
+                </a>
+            </div>
         </div>
     </div>
 
@@ -35,7 +51,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif
-    
+
     @if(session('warning'))
         <div class="alert alert-warning border-0 shadow-sm alert-dismissible fade show">
             <i class="bi bi-exclamation-circle me-2"></i> {{ session('warning') }}
@@ -76,7 +92,7 @@
                                 @else
                                     <div class="text-muted"><i class="bi bi-bank me-1"></i> Transversal</div>
                                 @endif
-                                
+
                                 @if($user->department)
                                     <div class="text-muted mt-1"><i class="bi bi-diagram-2 me-1"></i> {{ $user->department->name }}</div>
                                 @endif

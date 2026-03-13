@@ -13,20 +13,45 @@
             padding: 0;
         }
         .header {
-            text-align: center;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
+            background-color: #e9f2ff;
+            border: 1px solid #cfe2ff;
+            border-left: 6px solid #0d6efd;
+            border-radius: 8px;
+            padding: 16px 18px;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+        .header-kicker {
+            margin: 0 0 6px 0;
+            color: #0d6efd;
+            font-size: 9pt;
+            font-weight: bold;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
         .header h1 {
-            color: #0056b3;
+            color: #0b3d91;
             font-size: 20pt;
-            margin: 0 0 5px 0;
+            margin: 0 0 4px 0;
         }
-        .header p {
+        .header-subtitle {
             margin: 0;
-            color: #666;
+            color: #5b6675;
             font-size: 10pt;
+        }
+        .meta-row {
+            margin-top: 10px;
+        }
+        .meta-badge {
+            display: inline-block;
+            background-color: #fff;
+            border: 1px solid #b8daff;
+            color: #0d6efd;
+            border-radius: 14px;
+            font-size: 8.5pt;
+            font-weight: bold;
+            padding: 4px 10px;
+            margin-right: 8px;
         }
         .section-title {
             color: #154c79;
@@ -36,7 +61,6 @@
             margin-bottom: 15px;
             font-size: 14pt;
         }
-        
         .kpi-container {
             width: 100%;
             margin-bottom: 25px;
@@ -62,7 +86,6 @@
             text-transform: uppercase;
             margin: 5px 0 0 0;
         }
-
         table.data-table {
             width: 100%;
             border-collapse: collapse;
@@ -80,7 +103,6 @@
             text-align: left;
             font-weight: bold;
         }
-        
         .badge {
             display: inline-block;
             padding: 2px 6px;
@@ -94,50 +116,38 @@
         .bg-danger { background-color: #dc3545; }
         .bg-primary { background-color: #0d6efd; }
         .bg-secondary { background-color: #6c757d; }
-        
-        .page-break {
-            page-break-after: always;
-        }
-        .footer {
-            position: fixed;
-            bottom: 0px;
-            left: 0px;
-            right: 0px;
-            height: 30px;
-            font-size: 8pt;
-            color: #999;
-            text-align: right;
-            border-top: 1px solid #eee;
-            padding-top: 5px;
-        }
+        .page-break { page-break-after: always; }
     </style>
 </head>
 <body>
-
     <div class="header">
-        <h1>Rapport Stratégique de Suivi</h1>
-        <p>Généré le: {{ date('d/m/Y à H:i') }}</p>
+        <p class="header-kicker">Pilotage stratégique</p>
+        <h1>Rapport stratégique de suivi</h1>
+        <p class="header-subtitle">Synthèse exécutive de la performance institutionnelle</p>
+        <div class="meta-row">
+            <span class="meta-badge">Décisions : {{ $totalDecisions }}</span>
+            <span class="meta-badge">Généré le : {{ date('d/m/Y H:i') }}</span>
+        </div>
     </div>
 
-    <!-- KPIs globaux -->
-    <table class="kpi-container pb-0">
+    <table class="kpi-container">
         <tr>
             <td style="width: 25%">
                 <div class="kpi-box">
                     <p class="kpi-value">{{ $totalDecisions }}</p>
-                    <p class="kpi-label">Décisions Suivies</p>
+                    <p class="kpi-label">Décisions suivies</p>
                 </div>
             </td>
             <td style="width: 25%">
                 <div class="kpi-box">
                     <p class="kpi-value" style="color: #198754;">{{ number_format($avgProgress, 1) }}%</p>
-                    <p class="kpi-label">Avancement Moyen</p>
+                    <p class="kpi-label">Avancement moyen</p>
                 </div>
             </td>
             <td style="width: 25%">
                 <div class="kpi-box">
                     <p class="kpi-value" style="color: #ffc107;">{{ $delayedDecisions }}</p>
-                    <p class="kpi-label">En Souffrance</p>
+                    <p class="kpi-label">En souffrance</p>
                 </div>
             </td>
             <td style="width: 25%">
@@ -149,13 +159,13 @@
         </tr>
     </table>
 
-    <h2 class="section-title">Points d'Attention Prioritaires</h2>
+    <h2 class="section-title">Points d'attention prioritaires</h2>
     @if($priorityDecisions->count() > 0)
         <table class="data-table">
             <thead>
                 <tr>
                     <th style="width: 15%">Numéro / Type</th>
-                    <th style="width: 45%">Intitulé de la Décision</th>
+                    <th style="width: 45%">Intitulé de la décision</th>
                     <th style="width: 15%">Statut</th>
                     <th style="width: 25%">Institution / Échéance</th>
                 </tr>
@@ -198,30 +208,27 @@
 
     <div class="page-break"></div>
 
-    <h2 class="section-title">Analyse par Domaine Stratégique</h2>
-    
+    <h2 class="section-title">Analyse par domaine stratégique</h2>
     @foreach($domains as $domain)
         @php
             $domainDecisionsCount = $domain->decisions->count();
-            $domainAvgProgress = $domainDecisionsCount > 0
-                ? $domain->decisions->avg('progress_rate')
-                : 0;
+            $domainAvgProgress = $domainDecisionsCount > 0 ? $domain->decisions->avg('progress_rate') : 0;
         @endphp
-        
+
         <div style="background-color: #f1f5f9; padding: 10px; margin-bottom: 10px; border-left: 4px solid #0d6efd;">
-            <strong style="font-size: 11pt;">{{ $domain->name }}</strong> 
+            <strong style="font-size: 11pt;">{{ $domain->name }}</strong>
             <span style="float: right; color: #666; font-size: 10pt;">
                 (Décisions: {{ $domainDecisionsCount }} | Perf: <strong>{{ number_format($domainAvgProgress, 1) }}%</strong>)
             </span>
         </div>
-        
+
         @if($domainDecisionsCount > 0)
             <table class="data-table">
                 <thead>
                     <tr>
                         <th style="width: 50%">Décision</th>
                         <th style="width: 25%">Avancement</th>
-                        <th style="width: 25%">Statut Global</th>
+                        <th style="width: 25%">Statut global</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -239,7 +246,7 @@
                                 @if($dec->status == 'completed')
                                     <span style="color: #198754; font-weight: bold;">Achevé</span>
                                 @elseif($dec->status == 'delayed')
-                                    <span style="color: #dc3545; font-weight: bold;">En Retard</span>
+                                    <span style="color: #dc3545; font-weight: bold;">En retard</span>
                                 @else
                                     <span style="color: #0d6efd;">Normal</span>
                                 @endif
@@ -249,8 +256,6 @@
                 </tbody>
             </table>
         @endif
-        
     @endforeach
-
 </body>
 </html>

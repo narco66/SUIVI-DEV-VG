@@ -2,20 +2,36 @@
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row mb-4 align-items-center">
-        <div class="col-12 col-md-auto me-auto">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb mb-1">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.index') }}" class="text-decoration-none">Administration</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">Domaines d'Action</li>
-                </ol>
-            </nav>
-            <h2 class="h3 fw-bold text-dark mb-0">Domaines d'Action</h2>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-diagram-3 fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Administration</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Domaines d'Action</h2>
+                        <p class="text-muted mb-2">Structurez les domaines stratégiques et leurs sous-domaines pour organiser la gouvernance des décisions.</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $domains->total() }} domaine(s) configuré(s)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0">
-            <button type="button" class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#createModal">
-                <i class="bi bi-plus-lg me-2"></i> Nouveau Domaine
-            </button>
+        <div class="col-12 col-md-auto d-flex align-items-stretch">
+            <div class="h-100 w-100 d-flex flex-column justify-content-between rounded-4 border bg-white p-4 shadow-sm">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mb-2">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.index') }}" class="text-decoration-none">Administration</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Domaines d'action</li>
+                    </ol>
+                </nav>
+                <button type="button" class="btn btn-primary px-4 w-100" data-bs-toggle="modal" data-bs-target="#createModal">
+                    <i class="bi bi-plus-lg me-2"></i> Nouveau Domaine
+                </button>
+            </div>
         </div>
     </div>
 
@@ -70,7 +86,6 @@
                         </td>
                     </tr>
 
-                    <!-- Edit Modal -->
                     <div class="modal fade" id="editModal{{ $domain->id }}" tabindex="-1" aria-hidden="true">
                         <div class="modal-dialog">
                             <form method="POST" action="{{ route('domains.update', $domain->id) }}">
@@ -95,7 +110,7 @@
                                             <select name="parent_id" class="form-select">
                                                 <option value="">Aucun (Domaine racine)</option>
                                                 @foreach($parentDomains as $parent)
-                                                    @if($parent->id !== $domain->id) <!-- Avoid self-referencing -->
+                                                    @if($parent->id !== $domain->id)
                                                         <option value="{{ $parent->id }}" {{ $domain->parent_id == $parent->id ? 'selected' : '' }}>{{ $parent->name }}</option>
                                                     @endif
                                                 @endforeach
@@ -133,7 +148,6 @@
     </div>
 </div>
 
-<!-- Create Modal -->
 <div class="modal fade" id="createModal" tabindex="-1" aria-hidden="true">
     <div class="modal-dialog">
         <form method="POST" action="{{ route('domains.store') }}">

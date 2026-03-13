@@ -2,13 +2,26 @@
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Plans d'Action</h2>
-            <p class="text-muted mb-0">Suivi de la planification opérationnelle</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-diagram-3-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Planification</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Plans d'Action</h2>
+                        <p class="text-muted mb-2">Suivi de la planification opérationnelle</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $actionPlans->total() }} plan(s) suivi(s)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
-            <a href="{{ route('action-plans.create') }}" class="btn btn-primary px-4">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center">
+            <a href="{{ route('action-plans.create') }}" class="btn btn-primary px-4 py-2 shadow-sm">
                 <i class="bi bi-plus-lg me-2"></i> Nouveau Plan d'Action
             </a>
         </div>
@@ -113,3 +126,4 @@
     </div>
 </div>
 @endsection
+

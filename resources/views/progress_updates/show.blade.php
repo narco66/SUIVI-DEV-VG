@@ -2,24 +2,35 @@
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Detail du rapport d'avancement</h2>
-            <p class="text-muted mb-0">Reference #{{ $progressUpdate->id }}</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-journal-text fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Suivi</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Detail du rapport d'avancement</h2>
+                        <p class="text-muted mb-2">Reference #{{ $progressUpdate->id }}</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">{{ class_basename($progressUpdate->updatable_type) }}</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
-            <a href="{{ route('progress-updates.index') }}" class="btn btn-outline-secondary px-4 rounded-pill shadow-sm">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center gap-2">
+            <a href="{{ route('progress-updates.index') }}" class="btn btn-outline-secondary px-4 py-2 shadow-sm">
                 <i class="bi bi-arrow-left me-2"></i> Retour
             </a>
-            <a href="{{ route('progress-updates.export-pdf', $progressUpdate->id) }}" class="btn btn-danger px-4 text-white rounded-pill shadow-sm">
+            <a href="{{ route('progress-updates.export-pdf', $progressUpdate->id) }}" class="btn btn-danger px-4 py-2 text-white shadow-sm">
                 <i class="bi bi-file-earmark-pdf me-2"></i> Exporter PDF
             </a>
         </div>
     </div>
 
-    <div class="row g-4">
+    <div class="row g-4"> 
         <div class="col-12 col-xl-8">
-            <div class="card border-0 shadow-sm rounded-4 overflow-hidden h-100">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden border h-100">
                 <div class="card-body p-0">
                     <div class="bg-light bg-opacity-50 p-4 p-md-5 border-bottom border-primary border-4 d-flex justify-content-between align-items-center">
                         <div>
@@ -66,9 +77,11 @@
         </div>
 
         <div class="col-12 col-xl-4">
-            <div class="card border-0 shadow-sm mb-4 rounded-4 hover-elevate">
+            <div class="card border-0 shadow-sm mb-4 rounded-4 overflow-hidden border hover-elevate">
+                <div class="card-header bg-primary bg-opacity-10 py-3 border-bottom border-primary-subtle">
+                    <h6 class="text-uppercase fw-bold text-primary mb-0" style="font-size: 0.8rem; letter-spacing: 0.05em;"><i class="bi bi-info-circle me-2"></i> Informations générales</h6>
+                </div>
                 <div class="card-body p-4">
-                    <h6 class="text-uppercase fw-bold text-muted mb-4 pb-2 border-bottom" style="font-size: 0.8rem; letter-spacing: 0.05em;"><i class="bi bi-info-circle text-primary me-2"></i> Informations générales</h6>
                     <div class="d-flex align-items-center mb-3">
                         <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
                             <i class="bi bi-person fs-5"></i>
@@ -107,9 +120,11 @@
                 </div>
             </div>
 
-            <div class="card border-0 shadow-sm rounded-4">
+            <div class="card border-0 shadow-sm rounded-4 overflow-hidden border">
+                <div class="card-header bg-primary bg-opacity-10 py-3 border-bottom border-primary-subtle">
+                    <h6 class="text-uppercase fw-bold text-primary mb-0" style="font-size: 0.8rem; letter-spacing: 0.05em;"><i class="bi bi-shield-check me-2"></i> Historique des validations</h6>
+                </div>
                 <div class="card-body p-4">
-                    <h6 class="text-uppercase fw-bold text-muted mb-4 pb-2 border-bottom" style="font-size: 0.8rem; letter-spacing: 0.05em;"><i class="bi bi-shield-check text-primary me-2"></i> Historique des validations</h6>
                     @forelse($progressUpdate->validations as $validation)
                         <div class="bg-light rounded-4 p-4 border mb-3">
                             <div class="d-flex justify-content-between align-items-start mb-3">
@@ -136,3 +151,6 @@
     </div>
 </div>
 @endsection
+
+
+

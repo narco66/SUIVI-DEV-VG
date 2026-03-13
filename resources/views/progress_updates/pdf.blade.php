@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <title>Rapport d'avancement #{{ $update->id }}</title>
@@ -11,15 +11,45 @@
             color: #333;
         }
         .header {
-            text-align: center;
-            border-bottom: 2px solid #0056b3;
-            padding-bottom: 10px;
+            background-color: #e9f2ff;
+            border: 1px solid #cfe2ff;
+            border-left: 6px solid #0d6efd;
+            border-radius: 8px;
+            padding: 16px 18px;
             margin-bottom: 20px;
+            text-align: left;
+        }
+        .header-kicker {
+            margin: 0 0 6px 0;
+            color: #0d6efd;
+            font-size: 9pt;
+            font-weight: bold;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
         .header h1 {
-            color: #0056b3;
-            margin-bottom: 5px;
-            font-size: 24px;
+            color: #0b3d91;
+            margin: 0 0 4px 0;
+            font-size: 20pt;
+        }
+        .header-subtitle {
+            margin: 0;
+            color: #5b6675;
+            font-size: 10pt;
+        }
+        .meta-row {
+            margin-top: 10px;
+        }
+        .meta-badge {
+            display: inline-block;
+            background-color: #fff;
+            border: 1px solid #b8daff;
+            color: #0d6efd;
+            border-radius: 14px;
+            font-size: 8.5pt;
+            font-weight: bold;
+            padding: 4px 10px;
+            margin-right: 8px;
         }
         .info-block {
             background-color: #f8f9fa;
@@ -86,9 +116,13 @@
 </head>
 <body>
     <div class="header">
-        <h1>SUIVI-DEC</h1>
-        <h2>Fiche de Rapport d'Avancement #{{ $update->id }}</h2>
-        <p>Généré le {{ now()->format('d/m/Y à H:i') }}</p>
+        <p class="header-kicker">Suivi opérationnel</p>
+        <h1>Fiche de rapport d'avancement #{{ $update->id }}</h1>
+        <p class="header-subtitle">Synthèse détaillée du rapport soumis</p>
+        <div class="meta-row">
+            <span class="meta-badge">Taux: {{ $update->progress_rate }}%</span>
+            <span class="meta-badge">Généré le: {{ now()->format('d/m/Y H:i') }}</span>
+        </div>
     </div>
 
     <div class="info-block">
@@ -163,7 +197,7 @@
     @endif
 
     <div class="footer">
-        Fiche générée automatiquement par le système SUIVI-DEC. <br>
+        Fiche générée automatiquement par le système SUIVI-DEC.<br>
         © {{ date('Y') }} CEEAC
     </div>
 </body>

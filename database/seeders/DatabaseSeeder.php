@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             LeadershipAssignmentSeeder::class,
             OperationalPlanningSeeder::class,
             MonitoringWorkflowSeeder::class,
+            GedReferenceSeeder::class,
         ]);
     }
 }

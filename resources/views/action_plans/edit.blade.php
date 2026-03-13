@@ -1,21 +1,31 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
-<div class="container-fluid p-0 max-w-4xl mx-auto">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Modifier le Plan d'Action</h2>
-            <p class="text-muted mb-0">{{ Str::limit($actionPlan->title, 60) }}</p>
+<div class="container-fluid p-0 max-w-4xl mx-auto">`r`n    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-pencil-square fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Planification</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Modifier le Plan d'Action</h2>
+                        <p class="text-muted mb-2">{{ Str::limit($actionPlan->title, 60) }}</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">Édition en cours</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center gap-2">
             <form action="{{ route('action-plans.destroy', $actionPlan->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce plan d\'action ? Toutes les données associées seront perdues.');">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-outline-danger px-3" title="Supprimer">
+                <button type="submit" class="btn btn-outline-danger px-3 py-2 shadow-sm" title="Supprimer">
                     <i class="bi bi-trash"></i>
                 </button>
             </form>
-            <a href="{{ route('action-plans.index') }}" class="btn btn-outline-secondary px-4">
+            <a href="{{ route('action-plans.index') }}" class="btn btn-outline-secondary px-4 py-2 shadow-sm">
                 <i class="bi bi-arrow-left me-2"></i> Annuler
             </a>
         </div>
@@ -90,3 +100,5 @@
     </div>
 </div>
 @endsection
+
+

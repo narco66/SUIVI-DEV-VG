@@ -1,24 +1,35 @@
-@extends('layouts.app')
+?@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Détails de l'Activité</h2>
-            <p class="text-muted mb-0">Code : <span class="fw-medium">{{ $activity->code }}</span></p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-kanban-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Exécution</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Détails de l'Activité</h2>
+                        <p class="text-muted mb-2">Code : <span class="fw-medium">{{ $activity->code }}</span></p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">Vue détaillée</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center gap-2">
             <a href="{{ route('action-plans.show', $activity->action->strategicAxis->action_plan_id) }}" class="btn btn-outline-secondary px-4">
                 <i class="bi bi-arrow-left me-2"></i> Retour au Plan
             </a>
-            <a href="{{ route('activities.edit', $activity->id) }}" class="btn btn-primary px-4">
+            <a href="{{ route('activities.edit', $activity->id) }}" class="btn btn-primary px-4 py-2 shadow-sm">
                 <i class="bi bi-pencil me-2"></i> Modifier
             </a>
         </div>
     </div>
 
     <!-- Header Card -->
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card border-0 shadow-sm mb-4 rounded-4 overflow-hidden border">
         <div class="card-body p-4 p-md-5">
             <div class="d-flex justify-content-between align-items-start mb-4 pb-3 border-bottom">
                 <div>
@@ -62,8 +73,8 @@
     <div class="row g-4 mb-4">
         <!-- Milestones Column -->
         <div class="col-12 col-xl-6">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden border">
+                <div class="card-header bg-primary bg-opacity-10 py-3 d-flex justify-content-between align-items-center border-bottom border-primary-subtle">
                     <h5 class="mb-0 fw-bold"><i class="bi bi-flag text-primary me-2"></i> Jalons (Milestones)</h5>
                     <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createMilestoneModal"><i class="bi bi-plus"></i> Nouveau</button>
                 </div>
@@ -98,10 +109,10 @@
 
         <!-- Deliverables Column -->
         <div class="col-12 col-xl-6">
-            <div class="card border-0 shadow-sm h-100">
-                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold"><i class="bi bi-box-seam text-success me-2"></i> Livrables Attendus</h5>
-                    <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#createDeliverableModal"><i class="bi bi-plus"></i> Nouveau</button>
+            <div class="card border-0 shadow-sm h-100 rounded-4 overflow-hidden border">
+                <div class="card-header bg-primary bg-opacity-10 py-3 d-flex justify-content-between align-items-center border-bottom border-primary-subtle">
+                    <h5 class="mb-0 fw-bold"><i class="bi bi-box-seam text-primary me-2"></i> Livrables Attendus</h5>
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createDeliverableModal"><i class="bi bi-plus"></i> Nouveau</button>
                 </div>
                 <div class="card-body p-0">
                     <div class="table-responsive">
@@ -151,9 +162,9 @@
     <div class="row mb-4">
         <div class="col-12">
             <div class="card border-0 shadow-sm">
-                <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0 fw-bold"><i class="bi bi-speedometer2 text-info me-2"></i> Indicateurs de Performance (Impact)</h5>
-                    <button class="btn btn-sm btn-outline-info" data-bs-toggle="modal" data-bs-target="#createIndicatorModal">
+                <div class="card-header bg-primary bg-opacity-10 py-3 d-flex justify-content-between align-items-center border-bottom border-primary-subtle">
+                    <h5 class="mb-0 fw-bold"><i class="bi bi-speedometer2 text-primary me-2"></i> Indicateurs de Performance (Impact)</h5>
+                    <button class="btn btn-sm btn-outline-primary" data-bs-toggle="modal" data-bs-target="#createIndicatorModal">
                         <i class="bi bi-plus-circle"></i> Ajouter un Indicateur
                     </button>
                 </div>
@@ -234,7 +245,7 @@
     </div>
 
     <h5 class="fw-bold mb-3 mt-4"><i class="bi bi-clock-history text-primary me-2"></i> Suivi des Avancements</h5>
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card border-0 shadow-sm mb-4 rounded-4 overflow-hidden border">
         <div class="card-body p-0">
             <div class="table-responsive">
                 <table class="table table-hover align-middle mb-0">
@@ -401,3 +412,8 @@
 </div>
 
 @endsection
+
+
+
+
+

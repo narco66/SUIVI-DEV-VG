@@ -30,6 +30,12 @@
                             <i class="bi bi-grid-1x2-fill me-3"></i> Tableaux de bord
                         </a>
                     </li>
+                    <li class="nav-item mb-1 mt-2">
+                        <a href="{{ route('ai-analyses.create') }}" class="nav-link bg-primary bg-opacity-25 text-white rounded d-flex align-items-center py-2 px-3 border border-primary border-opacity-50 hover-elevate transition-all {{ request()->routeIs('ai-analyses.*') ? 'active-link fw-bold' : '' }}">
+                            <i class="bi bi-robot text-info me-3"></i> 
+                            <span>Assistant IA <span class="badge bg-info text-dark ms-2" style="font-size: 0.65rem;">NOUVEAU</span></span>
+                        </a>
+                    </li>
 
                     <p class="text-uppercase fw-semibold text-white-50 small mb-2 mt-4 px-2">Planification et Suivi</p>
                     <li class="nav-item mb-2">
@@ -39,7 +45,7 @@
                     </li>
                     <li class="nav-item mb-1">
                         <a href="{{ route('progress-updates.index') }}" class="nav-link text-white rounded d-flex align-items-center py-2 px-3 {{ request()->routeIs('progress-updates.*') ? 'active-link' : '' }}">
-                            <i class="bi bi-graph-up-arrow me-3"></i> Mises a jour
+                            <i class="bi bi-graph-up-arrow me-3"></i> Mises à jour
                         </a>
                     </li>
                     <li class="nav-item mb-1">
@@ -52,11 +58,21 @@
                             <i class="bi bi-file-earmark-bar-graph me-3"></i> Rapports Stratégiques
                         </a>
                     </li>
+                    <li class="nav-item mb-1">
+                        <a href="{{ route('ged.index') }}" class="nav-link text-white rounded d-flex align-items-center py-2 px-3 {{ request()->routeIs('ged.*') ? 'active-link' : '' }}">
+                            <i class="bi bi-folder2-open me-3"></i> GED
+                        </a>
+                    </li>
                     
                     <p class="text-uppercase fw-semibold text-white-50 small mb-2 mt-4 px-2">Administration</p>
                     <li class="nav-item mb-2">
                         <a href="{{ route('admin.index') }}" class="nav-link text-white rounded d-flex align-items-center py-2 px-3 {{ request()->routeIs('admin.*') || request()->routeIs('decision-types.*') || request()->routeIs('decision-categories.*') || request()->routeIs('domains.*') || request()->routeIs('sessions.*') ? 'active-link' : '' }}">
                             <i class="bi bi-gear-fill me-3"></i> Paramètres
+                        </a>
+                    </li>
+                    <li class="nav-item mb-1">
+                        <a href="{{ route('manual.download') }}" class="nav-link text-white rounded d-flex align-items-center py-2 px-3">
+                            <i class="bi bi-file-earmark-text me-3"></i> Manuel Utilisateur
                         </a>
                     </li>
                 </ul>
@@ -100,7 +116,7 @@
                                     <div class="dropdown-menu dropdown-menu-end border-0 shadow-sm mt-2" aria-labelledby="navbarDropdown">
                                         <a class="dropdown-item" href="{{ route('logout') }}"
                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                            <i class="bi bi-box-arrow-right me-2"></i> Deconnexion
+                                            <i class="bi bi-box-arrow-right me-2"></i> Déconnexion
                                         </a>
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
@@ -117,6 +133,24 @@
                 @if (session('success'))
                     <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm" role="alert">
                         <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div class="alert alert-danger alert-dismissible fade show border-0 shadow-sm" role="alert">
+                        <i class="bi bi-exclamation-octagon-fill me-2"></i>{{ session('error') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if (session('info'))
+                    <div class="alert alert-info alert-dismissible fade show border-0 shadow-sm" role="alert">
+                        <i class="bi bi-info-circle-fill me-2"></i>{{ session('info') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endif
+                @if (session('warning'))
+                    <div class="alert alert-warning alert-dismissible fade show border-0 shadow-sm" role="alert">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>{{ session('warning') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endif

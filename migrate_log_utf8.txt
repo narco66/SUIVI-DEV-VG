@@ -1,4 +1,4 @@
-﻿
+
    INFO  Preparing database.  
 
   Creating migration table  22.26ms DONE

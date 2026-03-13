@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/laragon/www/SUIVI-DEV-VG -type f -name *AiAnalysis* -o -name *ai_analysis* -o -name *ai_analyse*)",
+      "Bash(xargs grep:*)",
+      "Bash(php artisan:*)"
+    ]
+  }
+}

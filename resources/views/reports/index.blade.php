@@ -2,13 +2,26 @@
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Rapports Stratégiques</h2>
-            <p class="text-muted mb-0">Génération de rapports exécutifs pour les instances dirigeantes</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-journal-bookmark-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Rapportage</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Rapports Stratégiques</h2>
+                        <p class="text-muted mb-2">Génération de rapports exécutifs pour les instances dirigeantes</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $totalDecisions }} décisions suivies
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0">
-            <a href="{{ route('reports.strategic.pdf') }}" class="btn btn-danger px-4 rounded-pill shadow-sm" target="_blank">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center">
+            <a href="{{ route('reports.strategic.pdf') }}" class="btn btn-danger px-4 py-2 rounded-pill shadow-sm" target="_blank">
                 <i class="bi bi-file-earmark-pdf-fill me-2"></i> Générer le Rapport PDF
             </a>
         </div>
@@ -20,32 +33,32 @@
             <div class="card border-0 shadow-sm rounded-4 h-100">
                 <div class="card-body p-4 p-md-5">
                     <h5 class="fw-bold text-dark mb-4 pb-3 border-bottom d-flex align-items-center">
-                        <i class="bi bi-bar-chart-fill text-primary me-2"></i> Aperçu Macro-Stratégique
+                        <i class="bi bi-bar-chart-fill text-primary me-2"></i> Aperçu macro-stratégique
                     </h5>
-                    
+
                     <div class="row g-4 text-center">
                         <div class="col-md-6">
                             <div class="bg-light p-4 rounded-4 border">
                                 <h3 class="display-5 fw-bold text-primary mb-0">{{ $totalDecisions }}</h3>
-                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">Décisions Suivies</p>
+                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">Décisions suivies</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="bg-light p-4 rounded-4 border">
                                 <h3 class="display-5 fw-bold text-success mb-0">{{ number_format($averageProgress, 1) }}%</h3>
-                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">Taux d'Avancement Moyen</p>
+                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">Taux d'avancement moyen</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="bg-light p-4 rounded-4 border">
                                 <h3 class="display-5 fw-bold text-warning mb-0">{{ $delayedDecisions }}</h3>
-                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">En Souffrance / Retard</p>
+                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">En souffrance / retard</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="bg-light p-4 rounded-4 border">
                                 <h3 class="display-5 fw-bold text-info mb-0">{{ $completedDecisions }}</h3>
-                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">Décisions Achevées</p>
+                                <p class="text-muted text-uppercase small fw-medium mt-2 mb-0">Décisions achevées</p>
                             </div>
                         </div>
                     </div>

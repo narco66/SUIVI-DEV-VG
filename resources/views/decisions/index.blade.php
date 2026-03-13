@@ -1,17 +1,30 @@
-@extends('layouts.app')
+?@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row mb-4 align-items-center">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Décisions Communautaires</h2>
-            <p class="text-muted mb-0">Gestion et suivi de la mise en œuvre</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-file-earmark-text-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Pilotage</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Décisions Communautaires</h2>
+                        <p class="text-muted mb-2">Gestion et suivi de la mise en œuvre</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $decisions->total() }} décision(s)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center gap-2">
             <a href="{{ route('decisions.export', request()->query()) }}" class="btn btn-outline-secondary px-4">
                 <i class="bi bi-download me-2"></i> Exporter (.xlsx)
             </a>
-            <a href="{{ route('decisions.create') }}" class="btn btn-primary px-4">
+            <a href="{{ route('decisions.create') }}" class="btn btn-primary px-4 py-2 shadow-sm">
                 <i class="bi bi-plus-lg me-2"></i> Nouvelle Décision
             </a>
         </div>
@@ -24,9 +37,9 @@
         </div>
     @endif
 
-    <div class="card border-0 shadow-sm mb-4 rounded-4 bg-light bg-opacity-50">
+    <div class="card border-0 shadow-sm mb-4 rounded-4 bg-primary bg-opacity-10 overflow-hidden">
         <div class="card-body p-4">
-            <h6 class="text-uppercase fw-bold text-muted mb-3" style="font-size: 0.8rem; letter-spacing: 0.05em;"><i class="bi bi-funnel me-1"></i> Filtres de recherche</h6>
+            <h6 class="text-uppercase fw-bold text-primary mb-3" style="font-size: 0.8rem; letter-spacing: 0.05em;"><i class="bi bi-funnel me-1"></i> Filtres de recherche</h6>
             <form method="GET" action="{{ route('decisions.index') }}" class="row g-3 align-items-center">
                 <div class="col-md-5">
                     <div class="input-group">
@@ -44,7 +57,7 @@
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-dark w-100 py-2"><i class="bi bi-filter"></i> Filtrer</button>
+                    <button type="submit" class="btn btn-primary w-100 py-2"><i class="bi bi-filter"></i> Filtrer</button>
                 </div>
                 <div class="col-md-2 text-center">
                     <a href="{{ route('decisions.index') }}" class="text-muted text-decoration-none small hover-primary"><i class="bi bi-x-circle me-1"></i>Réinitialiser</a>
@@ -130,3 +143,8 @@
     </div>
 </div>
 @endsection
+
+
+
+
+

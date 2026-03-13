@@ -2,17 +2,27 @@
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12">
-            <h2 class="h3 fw-bold text-dark mb-0">Paramètres et Administration</h2>
-            <p class="text-muted mb-0">Gestion centralisée des données de référence de l'application.</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-gear-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Administration</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Paramètres et Administration</h2>
+                        <p class="text-muted mb-2">Gestion centralisée des données de référence de l'application.</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">Centre de configuration</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Paramètres Généraux (Nomenclature) -->
     <h4 class="mb-3 mt-4 fw-semibold text-primary"><i class="bi bi-tags-fill me-2"></i>Nomenclature et Catégorisation</h4>
     <div class="row g-4 mb-5">
-        
         <div class="col-md-6 col-lg-3">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body p-4 text-center">
@@ -20,12 +30,12 @@
                         <i class="bi bi-file-earmark-text fs-3"></i>
                     </div>
                     <h5 class="fw-bold">Types de Décision</h5>
-                    <p class="small text-muted mb-4">Règlements, Directives, Recommandations, etc.</p>
+                    <p class="small text-muted mb-4">Règlements, directives, recommandations, etc.</p>
                     <a href="{{ route('decision-types.index') }}" class="btn btn-outline-primary btn-sm w-100">Gérer les types</a>
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-6 col-lg-3">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body p-4 text-center">
@@ -51,7 +61,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="col-md-6 col-lg-3">
             <div class="card border-0 shadow-sm h-100">
                 <div class="card-body p-4 text-center">
@@ -59,7 +69,7 @@
                         <i class="bi bi-calendar-event fs-3"></i>
                     </div>
                     <h5 class="fw-bold">Sessions</h5>
-                    <p class="small text-muted mb-4">Sessions ordinaires, extraordinaires des instances.</p>
+                    <p class="small text-muted mb-4">Sessions ordinaires et extraordinaires des instances.</p>
                     <a href="{{ route('sessions.index') }}" class="btn btn-outline-primary btn-sm w-100">Gérer les sessions</a>
                 </div>
             </div>
@@ -89,7 +99,7 @@
                         <i class="bi bi-bank fs-4"></i>
                     </div>
                     <div>
-                        <h6 class="fw-bold mb-1">Institutions & Organes</h6>
+                        <h6 class="fw-bold mb-1">Institutions et Organes</h6>
                         <a href="{{ route('institutions.index') }}" class="text-decoration-none small fw-medium">Gérer les organes &rarr;</a>
                     </div>
                 </div>
@@ -150,7 +160,7 @@
                     <div class="d-flex justify-content-between align-items-start mb-3">
                         <div>
                             <h5 class="fw-bold mb-1"><i class="bi bi-journal-medical text-danger me-2"></i>Journal d'Audit</h5>
-                            <p class="small text-muted mb-0">Historique inaltérable de toutes les actions clés du système (Création, Validation, Suppression).</p>
+                            <p class="small text-muted mb-0">Historique inaltérable de toutes les actions clés du système (création, validation, suppression).</p>
                         </div>
                         <a href="{{ route('audit-logs.index') }}" class="btn btn-outline-danger btn-sm">Consulter le journal</a>
                     </div>

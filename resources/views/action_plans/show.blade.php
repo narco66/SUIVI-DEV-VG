@@ -1,26 +1,39 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Détails du Plan d'Action</h2>
-            <p class="text-muted mb-0">Structure de planification (Axes, Actions, Activités)</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-diagram-3-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Planification</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Détails du Plan d'Action</h2>
+                        <p class="text-muted mb-2">Structure de planification (Axes, Actions, Activités)</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $actionPlan->strategicAxes->count() }} axe(s) stratégique(s)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-12 col-md-auto mt-3 mt-md-0 d-flex gap-2">
-            <a href="{{ route('action-plans.index') }}" class="btn btn-outline-secondary px-4">
+        <div class="col-12 col-md-auto mt-0 d-flex align-items-center gap-2">
+            <a href="{{ route('action-plans.index') }}" class="btn btn-outline-secondary px-4 py-2 shadow-sm">
                 <i class="bi bi-arrow-left me-2"></i> Retour
             </a>
-            <a href="{{ route('action-plans.edit', $actionPlan->id) }}" class="btn btn-primary px-4">
+            <a href="{{ route('action-plans.edit', $actionPlan->id) }}" class="btn btn-primary px-4 py-2 shadow-sm">
                 <i class="bi bi-pencil me-2"></i> Modifier le plan
             </a>
-            <button type="button" class="btn btn-dark px-4" data-bs-toggle="modal" data-bs-target="#createAxisModal">
+            <button type="button" class="btn btn-dark px-4 py-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#createAxisModal">
                 <i class="bi bi-diagram-2 me-2"></i> Ajouter un Axe Stratégique
             </button>
         </div>
     </div>
 
-    <div class="card border-0 shadow-sm mb-4">
+    <div class="card border-0 shadow-sm mb-4"> 
         <div class="card-body p-4 p-md-5">
             <div class="d-flex justify-content-between align-items-start mb-4 pb-3 border-bottom">
                 <div>
@@ -319,3 +332,6 @@
     });
 </script>
 @endsection
+
+
+

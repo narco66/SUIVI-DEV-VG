@@ -1,11 +1,24 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div>
-            <h2 class="h3 fw-bold text-dark mb-0">Workflows d'Approbation</h2>
-            <p class="text-muted mb-0">Gérez et validez les soumissions d'avancement des activités et plans d'actions.</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-shield-check fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Validation</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Workflows d'Approbation</h2>
+                        <p class="text-muted mb-2">Gérez et validez les soumissions d'avancement des activités et plans d'actions.</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $pendingUpdates->total() }} en attente
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -28,8 +41,8 @@
                             <thead class="bg-light text-muted small text-uppercase">
                                 <tr>
                                     <th class="ps-4 py-3">Élément concerné</th>
-                                    <th class="py-3">Détail Soumission</th>
-                                    <th class="py-3">Taux Proposé</th>
+                                    <th class="py-3">Détail soumission</th>
+                                    <th class="py-3">Taux proposé</th>
                                     <th class="pe-4 py-3 text-end">Action</th>
                                 </tr>
                             </thead>
@@ -90,7 +103,7 @@
                                                             <p class="small text-muted mb-1">Élément :</p>
                                                             <p class="fw-semibold mb-2">{{ $update->updatable->title ?? 'N/A' }}</p>
                                                             
-                                                            <p class="small text-muted mb-1">Nouveau Taux Demandé :</p>
+                                                            <p class="small text-muted mb-1">Nouveau taux demandé :</p>
                                                             <h3 class="fw-bold text-primary mb-2">{{ $update->progress_rate }}%</h3>
                                                             
                                                             <p class="small text-muted mb-1">Observation point focal :</p>
@@ -150,7 +163,7 @@
                                 <tr>
                                     <th class="ps-4">Date</th>
                                     <th>Élément validé</th>
-                                    <th>Taux Acté</th>
+                                    <th>Taux acté</th>
                                     <th>Statut</th>
                                 </tr>
                             </thead>
@@ -186,3 +199,6 @@
     </div>
 </div>
 @endsection
+
+
+

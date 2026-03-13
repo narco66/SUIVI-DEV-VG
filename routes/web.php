@@ -11,6 +11,10 @@ use App\Http\Controllers\ProgressUpdateController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\ValidationController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\AiAnalysisController;
+use App\Http\Controllers\GedController;
+use App\Http\Controllers\DocumentValidationController;
+use App\Http\Controllers\ManualController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -30,6 +34,8 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
     Route::get('decisions/export', [DecisionController::class, 'export'])->name('decisions.export');
+    Route::post('decisions/preview', [DecisionController::class, 'preview'])->name('decisions.preview');
+    Route::post('decisions/autosave', [DecisionController::class, 'autosave'])->name('decisions.autosave');
     Route::resource('decisions', DecisionController::class);
     Route::resource('action-plans', ActionPlanController::class);
     Route::resource('strategic-axes', StrategicAxisController::class);
@@ -39,8 +45,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('progress-updates/{progress_update}/export-pdf', [ProgressUpdateController::class, 'exportPdf'])->name('progress-updates.export-pdf');
     Route::resource('progress-updates', ProgressUpdateController::class);
     
-    // GED
-    Route::resource('documents', DocumentController::class)->only(['store', 'destroy']);
+    // GED — Documents (store + update pour versioning, destroy pour suppression logique)
+    Route::resource('documents', DocumentController::class)->only(['store', 'update', 'destroy']);
     Route::get('documents/{document}/download', [DocumentController::class, 'download'])->name('documents.download');
     
     // Validations
@@ -50,6 +56,15 @@ Route::middleware(['auth'])->group(function () {
     // Rapports Stratégiques
     Route::get('reports/strategic', [ReportController::class, 'index'])->name('reports.index');
     Route::get('reports/strategic/pdf', [ReportController::class, 'strategicPdf'])->name('reports.strategic.pdf');
+
+    // Module IA : Analyse de Décisions
+    Route::get('ai-analyses/create', [AiAnalysisController::class, 'create'])->name('ai-analyses.create');
+    // Throttle : max 5 analyses par utilisateur par heure (prévient le spam API OpenAI)
+    Route::post('ai-analyses/analyze', [AiAnalysisController::class, 'analyze'])
+        ->middleware('throttle:5,60')
+        ->name('ai-analyses.analyze');
+    Route::get('ai-analyses/{aiAnalysis}', [AiAnalysisController::class, 'show'])->name('ai-analyses.show');
+    Route::post('ai-analyses/{aiAnalysis}/confirm', [AiAnalysisController::class, 'confirm'])->name('ai-analyses.confirm');
 
     // Missing Routes from previous features
     Route::resource('actor-assignments', ActorAssignmentController::class)->only(['store', 'destroy']);
@@ -75,7 +90,21 @@ Route::middleware(['auth'])->group(function () {
     Route::get('audit-logs', [\App\Http\Controllers\AuditLogController::class, 'index'])->name('audit-logs.index');
     Route::get('audit-logs/{auditLog}', [\App\Http\Controllers\AuditLogController::class, 'show'])->name('audit-logs.show');
 
+    // GED — Module principal
+    Route::get('ged', [GedController::class, 'index'])->name('ged.index');
+    Route::get('ged/export', [GedController::class, 'export'])->name('ged.export');
+    Route::get('ged/documents/{document}', [GedController::class, 'show'])->name('ged.show');
+
+    // GED — Workflow de validation documentaire
+    Route::get('ged/validations', [DocumentValidationController::class, 'index'])->name('ged.validations.index');
+    Route::post('ged/documents/{document}/start-validation', [DocumentValidationController::class, 'start'])->name('ged.validations.start');
+    Route::post('ged/validations/{step}/approve', [DocumentValidationController::class, 'approve'])->name('ged.validations.approve');
+    Route::post('ged/validations/{step}/reject', [DocumentValidationController::class, 'reject'])->name('ged.validations.reject');
+
     // Gestion des Utilisateurs et Rôles
     Route::resource('users', \App\Http\Controllers\UserController::class);
     Route::resource('roles', \App\Http\Controllers\RoleController::class);
+
+    // Manuel Utilisateur
+    Route::get('manual/download', [ManualController::class, 'download'])->name('manual.download');
 });

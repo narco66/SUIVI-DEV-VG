@@ -1,11 +1,24 @@
-@extends('layouts.app')
+?@extends('layouts.app')
 
 @section('content')
 <div class="container-fluid p-0">
-    <div class="row align-items-center mb-4">
-        <div class="col-12 col-md-auto me-auto">
-            <h2 class="h3 fw-bold text-dark mb-0">Historique des Avancements</h2>
-            <p class="text-muted mb-0">Contrôle et validation des rapports remontés</p>
+    <div class="row align-items-stretch g-3 mb-4">
+        <div class="col-12 col-md me-auto">
+            <div class="h-100 rounded-4 border bg-primary bg-opacity-10 p-4 shadow-sm">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-shape bg-white text-primary rounded-circle icon-lg shadow-sm">
+                        <i class="bi bi-graph-up-arrow fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="text-uppercase fw-semibold text-primary mb-1" style="font-size: 0.72rem; letter-spacing: 0.08em;">Suivi</p>
+                        <h2 class="h3 fw-bold text-dark mb-1">Historique des Avancements</h2>
+                        <p class="text-muted mb-2">Contrôle et validation des rapports remontés</p>
+                        <span class="badge bg-white text-primary border fw-semibold px-3 py-2">
+                            {{ $updates->total() }} rapport(s)
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -16,7 +29,11 @@
         </div>
     @endif
 
-    <div class="card border-0 shadow-sm rounded-4 overflow-hidden fade-in" style="animation-delay: 0.1s;">
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden border fade-in" style="animation-delay: 0.1s;">
+        <div class="card-header bg-primary bg-opacity-10 py-3 d-flex justify-content-between align-items-center border-bottom border-primary-subtle">
+            <h5 class="mb-0 fw-bold text-dark"><i class="bi bi-table text-primary me-2"></i>Rapports d'avancement</h5>
+            <span class="badge bg-white text-primary border fw-semibold px-3 py-2">{{ $updates->total() }}</span>
+        </div>
         <div class="table-responsive">
             <table class="table table-hover align-middle mb-0 table-borderless">
                 <thead class="bg-light text-muted small text-uppercase" style="letter-spacing: 0.03em;">
@@ -68,19 +85,21 @@
                             <div class="d-flex justify-content-end align-items-center">
                                 <a href="{{ route('progress-updates.show', $update) }}" class="btn btn-sm btn-light text-primary py-2 px-3 border hover-elevate rounded-pill shadow-sm" title="Voir les details"><i class="bi bi-eye me-1"></i>Détails</a>
                             @if($update->status == 'pending')
-                            <div class="btn-group ms-1">
-                                <form action="{{ route('validations.store') }}" method="POST" class="d-inline">
-                                    @csrf
-                                    <input type="hidden" name="update_id" value="{{ $update->id }}">
-                                    <input type="hidden" name="status" value="approved">
-                                    <button type="submit" class="btn btn-sm btn-outline-success" title="Valider" onclick="return confirm('Confirmez-vous la validation de cet avancement ?');"><i class="bi bi-check-lg"></i></button>
-                                </form>
-                                <form action="{{ route('validations.store') }}" method="POST" class="d-inline ms-1">
-                                    @csrf
-                                    <input type="hidden" name="update_id" value="{{ $update->id }}">
-                                    <input type="hidden" name="status" value="rejected">
-                                    <button type="submit" class="btn btn-sm btn-outline-danger" title="Rejeter" onclick="return confirm('Confirmez-vous le rejet de cet avancement ?');"><i class="bi bi-x-lg"></i></button>
-                                </form>
+                                <div class="btn-group ms-1">
+                                    <form action="{{ route('validations.store') }}" method="POST" class="d-inline">
+                                        @csrf
+                                        <input type="hidden" name="update_id" value="{{ $update->id }}">
+                                        <input type="hidden" name="status" value="approved">
+                                        <button type="submit" class="btn btn-sm btn-outline-success" title="Valider" onclick="return confirm('Confirmez-vous la validation de cet avancement ?');"><i class="bi bi-check-lg"></i></button>
+                                    </form>
+                                    <form action="{{ route('validations.store') }}" method="POST" class="d-inline ms-1">
+                                        @csrf
+                                        <input type="hidden" name="update_id" value="{{ $update->id }}">
+                                        <input type="hidden" name="status" value="rejected">
+                                        <button type="submit" class="btn btn-sm btn-outline-danger" title="Rejeter" onclick="return confirm('Confirmez-vous le rejet de cet avancement ?');"><i class="bi bi-x-lg"></i></button>
+                                    </form>
+                                </div>
+                            @endif
                             </div>
                         </td>
                     </tr>
@@ -105,4 +124,7 @@
     </div>
 </div>
 @endsection
+
+
+
 
